@@ -6,8 +6,15 @@ A Scriptable Home Screen widget showing traffic-aware driving estimates from
 TomTom for Home → Himlayan, Home → Palengke, Home → Work, and Work → Home.
 
 - **Small:** four compact route rows. A `~` marks a saved estimate.
-- **Medium:** a two-column dashboard with mint travel times and a dark gradient.
-- **Large:** four roomy route cards.
+- **Medium:** four linear rows, route names on the left and large travel times on
+  the right, with a traffic strip beneath each name.
+- **Large:** roomy rows with distance and traffic delay beneath the route name.
+- Traffic strips run from origin (left) to destination (right), proportional to
+  distance. Mint means no reported incident, amber means minor or unclassified
+  traffic, red means moderate traffic, and dark red means major traffic or closure.
+  These are reported incident sections, not a measurement of every road's speed.
+  Gray means traffic is unavailable or the estimate is saved; old cached estimates
+  still work without traffic details.
 - Failed requests use the last successful estimate for up to 24 hours. Saved
   estimates appear in amber with their age; routes without usable data show as
   unavailable. The footer shows the oldest saved estimate when any are in use.
@@ -19,7 +26,7 @@ TomTom for Home → Himlayan, Home → Palengke, Home → Work, and Work → Hom
    in `API_KEY`, and adjust `coordinates` and `routes` if needed.
 2. Run it in Scriptable to preview the medium widget. This also saves the first
    successful estimates. There is no results alert.
-3. Add a **Scriptable** widget to your Home Screen. Choose medium for the dashboard.
+3. Add a **Scriptable** widget to your Home Screen. Choose medium for the row layout.
 4. Long-press the widget, choose **Edit Widget**, and select this script.
 
 The Home Screen widget fetches and renders estimates when iOS refreshes it.
@@ -29,7 +36,7 @@ estimates were fetched, rather than the last time the widget rendered.
 
 ### Taps and customization
 
-Tapping a route card opens driving directions in Apple Maps. Small widgets have
+Tapping a route row opens driving directions in Apple Maps. Small widgets have
 one tap target, so tapping anywhere opens the first route. Tapping the background
 of a medium or large widget also opens the first route. Maps calculates its own
 route and estimate, which can differ from TomTom.
@@ -44,7 +51,7 @@ preview. Home Screen widgets select their layout automatically. These layouts
 are intended for Home Screen widgets, not Lock Screen accessories.
 
 Implementation references: [Scriptable widgets](https://docs.scriptable.app/listwidget/),
-[route card links](https://docs.scriptable.app/widgetstack/), and
+[route row links](https://docs.scriptable.app/widgetstack/), and
 [TomTom routing](https://docs.tomtom.com/routing-api/documentation/tomtom-maps/v1/calculate-route).
 
 ## Terminal activity (`productive.js`)

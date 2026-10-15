@@ -33,7 +33,8 @@ function makeRouteUrl(route) {
   const points = `${route.from.lat},${route.from.lon}:${route.to.lat},${route.to.lon}`;
   const query = [
     `key=${encodeURIComponent(API_KEY)}`,
-    "traffic=true", "travelMode=car", "routeType=fastest", "departAt=now"
+    "traffic=true", "travelMode=car", "routeType=fastest", "departAt=now",
+    "sectionType=traffic", "routeRepresentation=polyline"
   ].join("&");
   return `https://api.tomtom.com/routing/1/calculateRoute/${points}/json?${query}`;
 }
@@ -46,6 +47,32 @@ function mapsUrl(route) {
 
 function routeKey(route) {
   return `${route.from.lat},${route.from.lon}:${route.to.lat},${route.to.lon}`;
+}
+
+// Normalize traffic sections to distance fractions, rather than point counts:
+// route geometry points are not evenly spaced along the road.
+function trafficSegments(route) {
+  const points = route.legs?.flatMap(leg => leg.points || []) || [];
+  if (points.length < 2 || !Array.isArray(route.sections)) return null;
+  const offsets = [0];
+  const radians = value => value * Math.PI / 180;
+  for (let i = 1; i < points.length; i++) {
+    const a = points[i - 1], b = points[i];
+    const h = Math.sin(radians(b.latitude - a.latitude) / 2) ** 2 +
+      Math.cos(radians(a.latitude)) * Math.cos(radians(b.latitude)) *
+      Math.sin(radians(b.longitude - a.longitude) / 2) ** 2;
+    offsets.push(offsets[i - 1] + 6371000 * 2 * Math.asin(Math.sqrt(Math.min(1, h))));
+  }
+  const total = offsets[offsets.length - 1];
+  if (!Number.isFinite(total) || total <= 0) return null;
+  return route.sections.filter(section => section.sectionType === "TRAFFIC")
+    .flatMap(section => {
+      const start = offsets[section.startPointIndex];
+      const end = offsets[section.endPointIndex];
+      if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start) return [];
+      return [{ start: start / total, end: end / total,
+        severity: section.magnitudeOfDelay || 0 }];
+    });
 }
 
 async function getTravelTime(route) {
@@ -63,7 +90,13 @@ async function getTravelTime(route) {
     // Do not log the request URL: it contains the API key.
     throw new Error("Travel time unavailable");
   }
-  return Math.max(1, Math.ceil(seconds / 60));
+  const calculated = data.routes[0];
+  return {
+    minutes: Math.max(1, Math.ceil(seconds / 60)),
+    distance: calculated.summary.lengthInMeters,
+    delay: calculated.summary.trafficDelayInSeconds,
+    traffic: trafficSegments(calculated)
+  };
 }
 
 function formatMinutes(minutes) {
@@ -93,10 +126,10 @@ try {
 const results = await Promise.all(routes.map(async route => {
   const key = routeKey(route);
   try {
-    const minutes = await getTravelTime(route);
+    const estimate = await getTravelTime(route);
     const updatedAt = Date.now();
-    cache[key] = { minutes, updatedAt };
-    return { route, minutes, updatedAt, saved: false };
+    cache[key] = { ...estimate, updatedAt };
+    return { route, ...estimate, updatedAt, saved: false };
   } catch (_) {
     const previous = cache[key];
     const age = Date.now() - previous?.updatedAt;
@@ -117,7 +150,8 @@ try {
 const palette = {
   text: new Color("F4F7FC"), muted: new Color("A5B4CA"),
   accent: new Color("67E8C5"), warning: new Color("F6C977"),
-  card: new Color("FFFFFF", 0.06)
+  slow: new Color("F6C977"), heavy: new Color("FA7474"),
+  severe: new Color("D84160"), unknown: new Color("536176")
 };
 
 function text(parent, value, size, color, bold = false) {
@@ -133,32 +167,58 @@ function routeLabel(route) {
   return route.name.replace(/ to /i, " → ");
 }
 
+// Left edge is the origin; right edge is the destination. Gray means unknown.
+function trafficBar(result, width, height) {
+  const drawing = new DrawContext();
+  drawing.size = new Size(width, height);
+  drawing.respectScreenScale = true;
+  drawing.opaque = false;
+  const known = !result.saved && Array.isArray(result.traffic);
+  drawing.setFillColor(known ? palette.accent : palette.unknown);
+  drawing.fillRect(new Rect(0, 0, width, height));
+  if (known) {
+    // Paint the most severe sections last if incidents overlap.
+    [...result.traffic].sort((a, b) => a.severity - b.severity).forEach(segment => {
+      const colors = [palette.warning, palette.slow, palette.heavy, palette.severe, palette.severe];
+      drawing.setFillColor(colors[segment.severity] || palette.warning);
+      const x = Math.max(0, Math.min(1, segment.start)) * width;
+      const end = Math.max(0, Math.min(1, segment.end)) * width;
+      drawing.fillRect(new Rect(x, 0, Math.min(width - x, Math.max(1, end - x)), height));
+    });
+  }
+  return drawing.getImage();
+}
+
 function addRoute(parent, result, compact, large) {
   const row = parent.addStack();
+  row.centerAlignContent();
   if (OPEN_MAPS_ON_TAP && !compact) row.url = mapsUrl(result.route);
-  const color = result.saved || result.minutes === null ? palette.warning : palette.accent;
-  if (compact) {
-    row.centerAlignContent();
-    text(row, routeLabel(result.route), 9, palette.muted);
-    row.addSpacer(3);
-    text(row, result.minutes === null ? "—" :
-      `${result.saved ? "~" : ""}${formatMinutes(result.minutes)}`, 11, color, true);
-  } else {
-    row.layoutVertically();
-    row.backgroundColor = palette.card;
-    row.cornerRadius = 12;
-    row.setPadding(large ? 12 : 4, 10, large ? 12 : 4, 10);
-    text(row, routeLabel(result.route), large ? 13 : 10, palette.muted);
-    row.addSpacer(2);
-    const duration = row.addStack();
-    duration.centerAlignContent();
-    text(duration, result.minutes === null ? "Unavailable" : formatMinutes(result.minutes),
-      large ? 25 : 18, color, true);
-    if (result.saved) {
-      duration.addSpacer(5);
-      text(duration, `Saved ${savedAge(result.updatedAt)}`, 9, palette.warning);
-    }
+  const info = row.addStack();
+  info.layoutVertically();
+  text(info, routeLabel(result.route), compact ? 9 : large ? 14 : 11, palette.text, true);
+  if (large) {
+    info.addSpacer(4);
+    const details = [];
+    if (Number.isFinite(result.distance)) details.push(`${(result.distance / 1000).toFixed(1)} km`);
+    if (result.saved) details.push(`Saved ${savedAge(result.updatedAt)}`);
+    else if (Number.isFinite(result.delay)) details.push(result.delay > 0 ?
+      `+${Math.ceil(result.delay / 60)} min traffic` : "No reported delay");
+    if (!result.saved && !Array.isArray(result.traffic)) details.push("Traffic unavailable");
+    text(info, details.join(" · ") || "Unavailable", 10, palette.muted);
   }
+  info.addSpacer(large ? 7 : 3);
+  const width = compact ? 76 : large ? 205 : 165;
+  const height = large ? 5 : 3;
+  const bar = info.addImage(trafficBar(result, width, height));
+  bar.imageSize = new Size(width, height);
+  bar.cornerRadius = height / 2;
+  row.addSpacer();
+  row.addSpacer(compact ? 3 : 8);
+  const color = result.saved || result.minutes === null ? palette.warning : palette.accent;
+  const duration = text(row, result.minutes === null ? "—" :
+    `${result.saved ? "~" : ""}${formatMinutes(result.minutes)}`,
+    compact ? 12 : large ? 30 : 20, color, true);
+  duration.rightAlignText();
 }
 
 function createWidget(family) {
@@ -182,30 +242,15 @@ function createWidget(family) {
   text(header, "TRAVEL TIMES", compact ? 10 : 11, palette.text, true);
   header.addSpacer();
   if (!compact) text(header, "TOMTOM", 9, palette.muted);
-  widget.addSpacer(large ? 14 : 8);
+  widget.addSpacer(large ? 18 : 5);
 
-  if (compact || large) {
-    results.forEach((result, index) => {
-      if (index) widget.addSpacer(large ? 8 : 6);
-      addRoute(widget, result, compact, large);
-    });
-  } else {
-    // Two columns keep all four routes visible in a medium widget.
-    const grid = widget.addStack();
-    const left = grid.addStack();
-    left.layoutVertically();
-    grid.addSpacer(8);
-    const right = grid.addStack();
-    right.layoutVertically();
-    results.forEach((result, index) => {
-      const column = index % 2 === 0 ? left : right;
-      if (index >= 2) column.addSpacer(6);
-      addRoute(column, result, false, false);
-    });
-  }
+  results.forEach((result, index) => {
+    if (index) widget.addSpacer(large ? 18 : compact ? 5 : 3);
+    addRoute(widget, result, compact, large);
+  });
 
   widget.addSpacer();
-  widget.addSpacer(6);
+  widget.addSpacer(4);
   const saved = results.filter(result => result.saved);
   const unavailable = results.some(result => result.minutes === null);
   if (saved.length) {
