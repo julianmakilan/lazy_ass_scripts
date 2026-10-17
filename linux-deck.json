@@ -1,0 +1,3045 @@
+{
+  "schemaVersion": 1,
+  "title": "Linux administration: ten themed days",
+  "cards": [
+    {
+      "id": "linux-01-01",
+      "day": 1,
+      "theme": "Files and paths",
+      "title": "Locate your physical working directory",
+      "command": "pwd -P",
+      "explanation": "Print the current directory with symbolic links resolved.",
+      "breakdown": [
+        "pwd: print working directory",
+        "-P: use the physical path rather than the logical shell path"
+      ],
+      "output": "An absolute path; compare it with the path you expected.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/pwd.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/pwd.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-01-02",
+      "day": 1,
+      "theme": "Files and paths",
+      "title": "Inspect configuration directory entries",
+      "command": "ls -lah -- /etc",
+      "explanation": "List all entries with metadata and readable sizes.",
+      "breakdown": [
+        "ls: list entries",
+        "-l: long metadata format",
+        "-a: include dot entries",
+        "-h: readable size units",
+        "--: end options",
+        "/etc: directory to list"
+      ],
+      "output": "Permissions, owner, group, size and symlink targets; directory sizes are not recursive usage.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/ls.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/ls.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-01-03",
+      "day": 1,
+      "theme": "Files and paths",
+      "title": "Inspect the directory itself",
+      "command": "ls -ld -- /var/log",
+      "explanation": "Show metadata for the log directory rather than its children.",
+      "breakdown": [
+        "-l: long format",
+        "-d: list the directory entry itself",
+        "--: end options",
+        "/var/log: target directory"
+      ],
+      "output": "Directory ownership and search/write permission bits.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/ls.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/ls.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-01-04",
+      "day": 1,
+      "theme": "Files and paths",
+      "title": "Inspect one file’s timestamps",
+      "command": "stat -- /etc/passwd",
+      "explanation": "Display file metadata including ownership, size and timestamps.",
+      "breakdown": [
+        "stat: report metadata",
+        "--: end options",
+        "/etc/passwd: account database file"
+      ],
+      "output": "Access, Modify and Change timestamps; Change means inode metadata change, not creation.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/stat.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/stat.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-01-05",
+      "day": 1,
+      "theme": "Files and paths",
+      "title": "Resolve the system resolver configuration path",
+      "command": "readlink -f -- /etc/resolv.conf",
+      "explanation": "Canonicalize the resolver configuration path, following links.",
+      "breakdown": [
+        "readlink: inspect links",
+        "-f: canonicalize all path components; all but the last must exist",
+        "--: end options",
+        "/etc/resolv.conf: target"
+      ],
+      "output": "A canonical path, often under /run on systems with a managed resolver.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/readlink.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/readlink.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-01-06",
+      "day": 1,
+      "theme": "Files and paths",
+      "title": "Read the beginning of account records",
+      "command": "head -n 10 -- /etc/passwd",
+      "explanation": "Show the first ten account records.",
+      "breakdown": [
+        "head: print the beginning",
+        "-n 10: at most ten lines",
+        "--: end options",
+        "/etc/passwd: input file"
+      ],
+      "output": "Colon-separated records, including username, UID, GID, home and shell.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/head.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/head.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-01-07",
+      "day": 1,
+      "theme": "Files and paths",
+      "title": "Read the end of local group records",
+      "command": "tail -n 10 -- /etc/group",
+      "explanation": "Show the final ten group records.",
+      "breakdown": [
+        "tail: print the end",
+        "-n 10: last ten lines",
+        "--: end options",
+        "/etc/group: input"
+      ],
+      "output": "Group names, GIDs and supplementary member lists.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/tail.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/tail.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-01-08",
+      "day": 1,
+      "theme": "Files and paths",
+      "title": "Count account records",
+      "command": "wc -l -- /etc/passwd",
+      "explanation": "Count newline characters in the account database.",
+      "breakdown": [
+        "wc: count input",
+        "-l: count newlines",
+        "--: end options",
+        "/etc/passwd: input"
+      ],
+      "output": "A line count and filename; a final unterminated line is not counted.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/wc.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/wc.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-01-09",
+      "day": 1,
+      "theme": "Files and paths",
+      "title": "Compare two configuration snapshots",
+      "command": "diff -u -- /etc/hosts /etc/hosts.backup",
+      "explanation": "Compare the current hosts file with a backup you previously created.",
+      "breakdown": [
+        "diff: compare files",
+        "-u: unified diff with context",
+        "--: end options",
+        "first path: old side of diff",
+        "second path: new side of diff"
+      ],
+      "output": "Minus lines come from the first file, plus lines from the second. Exit 1 means differences; 2 means trouble.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "diffutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Requires an existing /etc/hosts.backup. This command creates no backup."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/diffutils/diff.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/diffutils/diff.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-01-10",
+      "day": 1,
+      "theme": "Files and paths",
+      "title": "Identify a configuration file format",
+      "command": "file -- /etc/ssh/sshd_config",
+      "explanation": "Use file signatures and heuristics to describe a server configuration file.",
+      "breakdown": [
+        "file: classify content",
+        "--: end options",
+        "/etc/ssh/sshd_config: target"
+      ],
+      "output": "Usually text; a missing file can mean the OpenSSH server is not installed.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "file",
+          "openssh-server"
+        ],
+        "additionalPackages": [
+          "file",
+          "openssh-server"
+        ],
+        "sudo": false,
+        "notes": "Optional package: file. Target exists when openssh-server configuration is installed."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/file/file.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/file/file.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-02-01",
+      "day": 2,
+      "theme": "Finding and filtering",
+      "title": "Find configuration files",
+      "command": "find /etc -type f -name \"*.conf\" -print",
+      "explanation": "Recursively locate regular files with a .conf suffix.",
+      "breakdown": [
+        "find /etc: walk /etc",
+        "-type f: regular files only",
+        "-name \"*.conf\": match basename glob; quotes prevent shell expansion",
+        "-print: print each matched path"
+      ],
+      "output": "Matching paths and any permission errors; newline-containing names can span lines.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "findutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/findutils/find.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/findutils/find.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-02-02",
+      "day": 2,
+      "theme": "Finding and filtering",
+      "title": "Limit a directory search depth",
+      "command": "find /var/log -maxdepth 1 -type f -print",
+      "explanation": "List regular files directly in the log directory.",
+      "breakdown": [
+        "/var/log: search root",
+        "-maxdepth 1: root and immediate children only",
+        "-type f: regular files",
+        "-print: print paths"
+      ],
+      "output": "Top-level logs; nested journal files will be excluded.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "findutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/findutils/find.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/findutils/find.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-02-03",
+      "day": 2,
+      "theme": "Finding and filtering",
+      "title": "Find files modified within the last day",
+      "command": "find /var/log -type f -mtime -1 -print",
+      "explanation": "Locate regular log files modified less than 24 hours ago.",
+      "breakdown": [
+        "-type f: regular files",
+        "-mtime -1: modification age rounds down to zero 24-hour periods",
+        "-print: print matches",
+        "/var/log: root"
+      ],
+      "output": "Recently modified paths; this is a rolling 24-hour window, not since midnight.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "findutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/findutils/find.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/findutils/find.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-02-04",
+      "day": 2,
+      "theme": "Finding and filtering",
+      "title": "Find unusually large logs",
+      "command": "find /var/log -type f -size +100M -print",
+      "explanation": "Locate regular log files larger than 100 MiB by find’s rounded size test.",
+      "breakdown": [
+        "/var/log: root",
+        "-type f: regular files",
+        "-size +100M: size rounded up in MiB units is greater than 100",
+        "-print: emit paths"
+      ],
+      "output": "Files whose rounded MiB size exceeds 100; investigate before deleting.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "findutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/findutils/find.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/findutils/find.1.en.html",
+        "https://www.gnu.org/software/findutils/manual/html_node/find_html/Size.html"
+      ]
+    },
+    {
+      "id": "linux-02-05",
+      "day": 2,
+      "theme": "Finding and filtering",
+      "title": "Find broken symlinks",
+      "command": "find /etc -xtype l -print",
+      "explanation": "Find symbolic links whose followed target cannot be resolved, under default non-following traversal.",
+      "breakdown": [
+        "/etc: root",
+        "-xtype l: with default -P, test followed type; broken links remain type l",
+        "-print: show paths"
+      ],
+      "output": "Broken or looping links; confirm the target is not intentionally absent.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "findutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/findutils/find.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/findutils/find.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-02-06",
+      "day": 2,
+      "theme": "Finding and filtering",
+      "title": "Find SSH directives with line numbers",
+      "command": "grep -nE \"^(Port|PermitRootLogin|PasswordAuthentication)[[:space:]]\" /etc/ssh/sshd_config",
+      "explanation": "Find active-looking SSH directives in the main file, without interpreting includes or effective settings.",
+      "breakdown": [
+        "grep: select matching lines",
+        "-n: line numbers",
+        "-E: extended regex",
+        "^: start of line",
+        "(...|...): alternatives",
+        "[[:space:]]: whitespace after keyword",
+        "quoted pattern: protect shell metacharacters",
+        "path: input"
+      ],
+      "output": "Matching directives; defaults, leading indentation and included files can make this incomplete.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "grep",
+          "openssh-server"
+        ],
+        "additionalPackages": [
+          "openssh-server"
+        ],
+        "sudo": false,
+        "notes": "Ubuntu/Debian openssh-server file; use sshd -T for effective settings. File may be absent."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/grep/grep.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/grep/grep.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-02-07",
+      "day": 2,
+      "theme": "Finding and filtering",
+      "title": "Search configuration text recursively",
+      "command": "grep -rIn -- \"nameserver\" /etc",
+      "explanation": "Find readable text lines containing nameserver.",
+      "breakdown": [
+        "-r: recursive, following symlinks only when supplied as command-line operands",
+        "-I: treat binary files as nonmatching",
+        "-n: line numbers",
+        "--: end options",
+        "\"nameserver\": search pattern",
+        "/etc: root"
+      ],
+      "output": "Filename:line:content; inaccessible files produce errors rather than silently disappearing.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "grep"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/grep/grep.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/grep/grep.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-02-08",
+      "day": 2,
+      "theme": "Finding and filtering",
+      "title": "Show context around an error",
+      "command": "grep -n -i -C 2 -- \"error\" /var/log/dpkg.log",
+      "explanation": "Find case-insensitive error text with two surrounding lines.",
+      "breakdown": [
+        "-n: line numbers",
+        "-i: ignore case",
+        "-C 2: two context lines on each side",
+        "--: end options",
+        "\"error\": literal-looking regex",
+        "path: dpkg log"
+      ],
+      "output": "Matched lines use a colon separator; context lines use a hyphen. No matches exits 1.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "grep"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Ubuntu/Debian dpkg log; may be rotated or absent."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/grep/grep.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/grep/grep.1.en.html",
+        "https://www.gnu.org/software/grep/manual/html_node/Matching-Control.html"
+      ]
+    },
+    {
+      "id": "linux-02-09",
+      "day": 2,
+      "theme": "Finding and filtering",
+      "title": "Find installed account shells",
+      "command": "cut -d: -f7 /etc/passwd | sort -u",
+      "explanation": "Extract and deduplicate shell fields from local accounts.",
+      "breakdown": [
+        "cut: select fields",
+        "-d:: colon delimiter",
+        "-f7: seventh field",
+        "/etc/passwd: input",
+        "|: feed stdout into next command",
+        "sort -u: sort and remove equal lines"
+      ],
+      "output": "Distinct shell paths, including nologin shells; this does not query directory services.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/cut.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/cut.1.en.html",
+        "https://manpages.debian.org/bookworm/coreutils/sort.1.en.html",
+        "https://manpages.debian.org/bookworm/bash/bash.1.en.html",
+        "https://www.gnu.org/software/bash/manual/html_node/Pipelines"
+      ]
+    },
+    {
+      "id": "linux-02-10",
+      "day": 2,
+      "theme": "Finding and filtering",
+      "title": "Count text configuration files safely",
+      "command": "find /etc -type f -name \"*.conf\" -print0 | xargs -0 -r wc -l",
+      "explanation": "Pass matching filenames safely to line counting even when names contain spaces or newlines.",
+      "breakdown": [
+        "find /etc: root",
+        "-type f: regular files",
+        "-name \"*.conf\": quoted basename glob",
+        "-print0: NUL-separated names",
+        "|: pipe names",
+        "xargs -0: read NUL separators",
+        "-r: skip wc when there are no names",
+        "wc -l: count newlines for each file"
+      ],
+      "output": "Counts and possible per-batch totals; xargs may invoke wc multiple times, so totals are not necessarily global.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "findutils",
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/findutils/find.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/findutils/find.1.en.html",
+        "https://manpages.debian.org/bookworm/findutils/xargs.1.en.html",
+        "https://manpages.debian.org/bookworm/coreutils/wc.1.en.html",
+        "https://manpages.debian.org/bookworm/bash/bash.1.en.html",
+        "https://www.gnu.org/software/bash/manual/html_node/Pipelines"
+      ]
+    },
+    {
+      "id": "linux-03-01",
+      "day": 3,
+      "theme": "Permissions and identity",
+      "title": "Inspect your user and group identity",
+      "command": "id",
+      "explanation": "Display real/effective user and group IDs and memberships.",
+      "breakdown": [
+        "id: without operands, report the current process identity"
+      ],
+      "output": "UID, primary GID and supplementary groups.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/id.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/id.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-03-02",
+      "day": 3,
+      "theme": "Permissions and identity",
+      "title": "Inspect another account’s groups",
+      "command": "id root",
+      "explanation": "Look up identity information for the root account.",
+      "breakdown": [
+        "id: report identity",
+        "root: account name operand"
+      ],
+      "output": "UID 0 and group memberships; account lookup uses configured name services.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/id.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/id.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-03-03",
+      "day": 3,
+      "theme": "Permissions and identity",
+      "title": "Show your supplementary group names",
+      "command": "groups",
+      "explanation": "List group names for the current process.",
+      "breakdown": [
+        "groups: no operands means current process group memberships"
+      ],
+      "output": "Groups inherited at login; recent group changes may require a fresh login.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/groups.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/groups.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-03-04",
+      "day": 3,
+      "theme": "Permissions and identity",
+      "title": "Inspect path traversal permissions",
+      "command": "namei -l /var/log",
+      "explanation": "Show ownership and permissions for every component of a path.",
+      "breakdown": [
+        "namei: resolve path components",
+        "-l: long mode with permissions and ownership",
+        "/var/log: target"
+      ],
+      "output": "Each directory needs search permission for traversal.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "util-linux"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/util-linux/namei.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/util-linux/namei.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-03-05",
+      "day": 3,
+      "theme": "Permissions and identity",
+      "title": "Read numeric and symbolic file permissions",
+      "command": "stat -c '%a %A %U:%G %n' -- /etc/passwd",
+      "explanation": "Print a compact permission and ownership report.",
+      "breakdown": [
+        "-c: custom format",
+        "%a: octal mode",
+        "%A: symbolic mode",
+        "%U:%G: owner and group names",
+        "%n: filename",
+        "single quotes: preserve format as one argument",
+        "--: end options",
+        "path: target"
+      ],
+      "output": "Typically 644 and root:root; investigate local policy before changing permissions.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/stat.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/stat.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-03-06",
+      "day": 3,
+      "theme": "Permissions and identity",
+      "title": "Find world-writable directories without a sticky bit",
+      "command": "find /tmp -type d -perm -0002 ! -perm -1000 -print",
+      "explanation": "Locate directories writable by others but lacking sticky deletion protection.",
+      "breakdown": [
+        "/tmp: root",
+        "-type d: directories",
+        "-perm -0002: other-write bit set",
+        "!: negate next test",
+        "-perm -1000: sticky bit set",
+        "implicit AND: require all tests",
+        "-print: matched paths"
+      ],
+      "output": "Unexpected shared directories; ACLs and mount options also affect access.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "findutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/findutils/find.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/findutils/find.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-03-07",
+      "day": 3,
+      "theme": "Permissions and identity",
+      "title": "Find set-user-ID programs",
+      "command": "find /usr/bin -type f -perm -4000 -print",
+      "explanation": "Inventory regular files with the set-user-ID mode bit.",
+      "breakdown": [
+        "/usr/bin: root",
+        "-type f: regular files",
+        "-perm -4000: require set-user-ID bit",
+        "-print: show matches"
+      ],
+      "output": "Expected privileged helpers; presence alone is not evidence of compromise.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "findutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/findutils/find.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/findutils/find.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-03-08",
+      "day": 3,
+      "theme": "Permissions and identity",
+      "title": "Display the shell creation mask",
+      "command": "umask -S",
+      "explanation": "Show the current Bash file-creation mask symbolically without changing it.",
+      "breakdown": [
+        "umask: Bash builtin",
+        "-S: show allowed permissions symbolically"
+      ],
+      "output": "Allowed bits for new objects, further limited by the creation mode and possibly default ACLs.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "bash"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/bash/bash.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/bash/bash.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-03-09",
+      "day": 3,
+      "theme": "Permissions and identity",
+      "title": "Make a private example file owner-only",
+      "command": "chmod 600 -- \"$HOME/private-notes.txt\"",
+      "explanation": "Restrict an existing personal file to owner read/write access.",
+      "breakdown": [
+        "chmod: change mode",
+        "600: owner read/write, no group or other mode permissions",
+        "--: end options",
+        "\"$HOME/private-notes.txt\": quoted home-expanded file path"
+      ],
+      "output": "No output on success; inspect with stat. This removes execute bits and can affect ACL masks.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Requires an existing file you own; creates no file."
+      },
+      "changesSystemState": true,
+      "stateChange": "CHANGES STATE: alters permissions of an existing file. Review the path before use.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/chmod.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/chmod.1.en.html",
+        "https://manpages.debian.org/bookworm/bash/bash.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-03-10",
+      "day": 3,
+      "theme": "Permissions and identity",
+      "title": "Read extended permissions",
+      "command": "getfacl -- /var/log",
+      "explanation": "Inspect access ACL entries and any default directory ACL.",
+      "breakdown": [
+        "getfacl: report ACL",
+        "--: end options",
+        "/var/log: target"
+      ],
+      "output": "Named users/groups and mask entries that can constrain effective permissions.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "acl"
+        ],
+        "additionalPackages": [
+          "acl"
+        ],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/acl/getfacl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/acl/getfacl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-04-01",
+      "day": 4,
+      "theme": "Disk and filesystems",
+      "title": "Check filesystem free space",
+      "command": "df -hT",
+      "explanation": "Display mounted filesystem capacity and types.",
+      "breakdown": [
+        "df: filesystem usage",
+        "-h: powers-of-1024 human sizes",
+        "-T: filesystem type column"
+      ],
+      "output": "Use% and Avail; full filesystems may prevent writes.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/df.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/df.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-04-02",
+      "day": 4,
+      "theme": "Disk and filesystems",
+      "title": "Check inode exhaustion",
+      "command": "df -i -- /var",
+      "explanation": "Show inode usage for the filesystem containing /var.",
+      "breakdown": [
+        "df: usage",
+        "-i: report inodes instead of blocks",
+        "--: end options",
+        "/var: select containing filesystem"
+      ],
+      "output": "IUse% can reach 100% while byte capacity remains.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/df.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/df.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-04-03",
+      "day": 4,
+      "theme": "Disk and filesystems",
+      "title": "Measure log directory allocation",
+      "command": "du -sh -- /var/log",
+      "explanation": "Estimate total allocated disk space under the log directory.",
+      "breakdown": [
+        "du: sum allocated storage",
+        "-s: one summary",
+        "-h: readable units",
+        "--: end options",
+        "/var/log: root"
+      ],
+      "output": "A size total; unreadable paths make the result incomplete.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/du.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/du.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-04-04",
+      "day": 4,
+      "theme": "Disk and filesystems",
+      "title": "Find the largest first-level home directories",
+      "command": "du -h --max-depth=1 -- \"$HOME\" | sort -h",
+      "explanation": "Rank home directory usage including the overall total.",
+      "breakdown": [
+        "du -h: readable allocated sizes",
+        "--max-depth=1: root and immediate subdirectory totals",
+        "--: end options",
+        "\"$HOME\": quoted home path",
+        "|: pipe totals",
+        "sort -h: compare human-readable size suffixes"
+      ],
+      "output": "Largest entries at the bottom; the home total includes all descendants.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/du.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/du.1.en.html",
+        "https://manpages.debian.org/bookworm/coreutils/sort.1.en.html",
+        "https://manpages.debian.org/bookworm/bash/bash.1.en.html",
+        "https://www.gnu.org/software/bash/manual/html_node/Pipelines",
+        "https://www.gnu.org/software/coreutils/manual/coreutils.html#sort-invocation"
+      ]
+    },
+    {
+      "id": "linux-04-05",
+      "day": 4,
+      "theme": "Disk and filesystems",
+      "title": "Compare apparent and allocated size",
+      "command": "du -h --apparent-size -- /var/log/lastlog",
+      "explanation": "Measure logical file length rather than allocated blocks.",
+      "breakdown": [
+        "du: report usage",
+        "-h: readable units",
+        "--apparent-size: logical bytes instead of blocks",
+        "--: end options",
+        "path: sparse-file example"
+      ],
+      "output": "Sparse lastlog files can have huge apparent size yet occupy little disk. File may be absent.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/du.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/du.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-04-06",
+      "day": 4,
+      "theme": "Disk and filesystems",
+      "title": "Inspect block devices and mounts",
+      "command": "lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINTS",
+      "explanation": "List block device topology with selected columns.",
+      "breakdown": [
+        "lsblk: list block devices",
+        "-o: explicit columns",
+        "NAME,SIZE,FSTYPE,MOUNTPOINTS: name, capacity, filesystem type and all mount points"
+      ],
+      "output": "Partitions, mapper devices and mount associations; some metadata may need privileges.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "util-linux"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/util-linux/lsblk.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/util-linux/lsblk.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-04-07",
+      "day": 4,
+      "theme": "Disk and filesystems",
+      "title": "Find the filesystem serving /var",
+      "command": "findmnt -T /var",
+      "explanation": "Identify the mounted filesystem containing a particular path.",
+      "breakdown": [
+        "findmnt: query mounts",
+        "-T /var: resolve the filesystem for this target path"
+      ],
+      "output": "SOURCE, FSTYPE and OPTIONS, including read-only or read-write state.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "util-linux"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/util-linux/findmnt.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/util-linux/findmnt.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-04-08",
+      "day": 4,
+      "theme": "Disk and filesystems",
+      "title": "List read-only mounts",
+      "command": "findmnt -O ro",
+      "explanation": "Filter mounts whose options include read-only.",
+      "breakdown": [
+        "findmnt: query mounts",
+        "-O ro: match the ro mount option"
+      ],
+      "output": "Read-only mounts, often intentionally immutable virtual or image filesystems.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "util-linux"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/util-linux/findmnt.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/util-linux/findmnt.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-04-09",
+      "day": 4,
+      "theme": "Disk and filesystems",
+      "title": "Inspect active swap areas",
+      "command": "swapon --show --bytes",
+      "explanation": "Display active swap devices/files with byte-based sizes.",
+      "breakdown": [
+        "swapon: swap administration tool",
+        "--show: inspection only",
+        "--bytes: sizes in bytes"
+      ],
+      "output": "SIZE, USED and priority; this invocation does not enable swap.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "mount"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/mount/swapon.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/mount/swapon.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-04-10",
+      "day": 4,
+      "theme": "Disk and filesystems",
+      "title": "Find deleted files still held open",
+      "command": "sudo lsof +L1",
+      "explanation": "Find open files whose link count is less than one.",
+      "breakdown": [
+        "sudo: run with elevated visibility",
+        "lsof: list open files",
+        "+L1: select link count below 1"
+      ],
+      "output": "Large deleted files retained by processes may explain df/du discrepancies; pseudo-files can also appear.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "lsof",
+          "sudo"
+        ],
+        "additionalPackages": [
+          "lsof"
+        ],
+        "sudo": true,
+        "notes": "Requires sudo authorization and optional lsof package. Reads system metadata; sudo may write an audit log."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/lsof/lsof.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/lsof/lsof.8.en.html",
+        "https://manpages.debian.org/bookworm/sudo/sudo.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-05-01",
+      "day": 5,
+      "theme": "Processes and memory",
+      "title": "List processes with parents and resource usage",
+      "command": "ps -eo pid,ppid,user,stat,%cpu,%mem,comm",
+      "explanation": "Take a process snapshot with explicit fields.",
+      "breakdown": [
+        "ps: process snapshot",
+        "-e: all processes",
+        "-o: format columns",
+        "pid,ppid,user,stat,%cpu,%mem,comm: process ID, parent, user, state, lifetime CPU percentage, resident memory percentage, executable name"
+      ],
+      "output": "Z states indicate zombies; CPU is averaged over process lifetime.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "procps"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/procps/ps.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/procps/ps.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-05-02",
+      "day": 5,
+      "theme": "Processes and memory",
+      "title": "Find the highest-memory processes",
+      "command": "ps -eo pid,user,%mem,rss,comm --sort=-rss | head -n 11",
+      "explanation": "Show a header and up to ten processes ranked by resident memory.",
+      "breakdown": [
+        "-e: all processes",
+        "-o pid,user,%mem,rss,comm: explicit fields; rss is KiB",
+        "--sort=-rss: descending RSS",
+        "|: pipe snapshot",
+        "head -n 11: header plus ten rows"
+      ],
+      "output": "RSS and memory percentage; shared pages can be counted in multiple processes.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "procps",
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/procps/ps.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/procps/ps.1.en.html",
+        "https://manpages.debian.org/bookworm/coreutils/head.1.en.html",
+        "https://manpages.debian.org/bookworm/bash/bash.1.en.html",
+        "https://www.gnu.org/software/bash/manual/html_node/Pipelines"
+      ]
+    },
+    {
+      "id": "linux-05-03",
+      "day": 5,
+      "theme": "Processes and memory",
+      "title": "Inspect a process tree",
+      "command": "ps -e --forest -o pid,ppid,comm",
+      "explanation": "Render process parent/child relationships.",
+      "breakdown": [
+        "-e: all processes",
+        "--forest: ASCII process tree",
+        "-o pid,ppid,comm: process, parent and executable name"
+      ],
+      "output": "Unexpected parents or repeated worker processes.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "procps"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/procps/ps.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/procps/ps.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-05-04",
+      "day": 5,
+      "theme": "Processes and memory",
+      "title": "Locate SSH daemon processes",
+      "command": "pgrep -a -x sshd",
+      "explanation": "List PIDs and command lines for processes named exactly sshd.",
+      "breakdown": [
+        "pgrep: search running processes",
+        "-a: show full command line",
+        "-x: exact process-name match",
+        "sshd: pattern"
+      ],
+      "output": "Listener and session processes if OpenSSH server is running; exit 1 means no matches.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "procps"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/procps/pgrep.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/procps/pgrep.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-05-05",
+      "day": 5,
+      "theme": "Processes and memory",
+      "title": "Inspect system init process",
+      "command": "ps -p 1 -o pid,comm,args",
+      "explanation": "Show the PID 1 executable and full command arguments.",
+      "breakdown": [
+        "-p 1: select PID 1",
+        "-o pid,comm,args: ID, executable name and command line"
+      ],
+      "output": "systemd on a normal systemd host; containers may use another init.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "procps"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/procps/ps.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/procps/ps.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-05-06",
+      "day": 5,
+      "theme": "Processes and memory",
+      "title": "Read memory availability",
+      "command": "free -h",
+      "explanation": "Display memory and swap totals in readable units.",
+      "breakdown": [
+        "free: memory summary",
+        "-h: human-readable units"
+      ],
+      "output": "Available is the estimate for new applications without swapping; low free alone is normal.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "procps"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/procps/free.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/procps/free.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-05-07",
+      "day": 5,
+      "theme": "Processes and memory",
+      "title": "Sample virtual memory activity",
+      "command": "vmstat 1 5",
+      "explanation": "Print five reports at one-second intervals.",
+      "breakdown": [
+        "vmstat: system activity summary",
+        "1: seconds between reports",
+        "5: number of reports"
+      ],
+      "output": "First report: activity rates average since boot; later rates cover each interval. Process/memory values are instantaneous. Watch si/so and wa.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "procps"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/procps/vmstat.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/procps/vmstat.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-05-08",
+      "day": 5,
+      "theme": "Processes and memory",
+      "title": "Read uptime and load averages",
+      "command": "uptime",
+      "explanation": "Show uptime, logged-in users and 1/5/15-minute load averages.",
+      "breakdown": [
+        "uptime: no arguments requests current system summary"
+      ],
+      "output": "Load counts runnable and uninterruptible tasks; compare with CPU count.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "procps"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/procps/uptime.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/procps/uptime.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-05-09",
+      "day": 5,
+      "theme": "Processes and memory",
+      "title": "Find available processing capacity",
+      "command": "nproc",
+      "explanation": "Print the processing units available to the current process.",
+      "breakdown": [
+        "nproc: report available processing units"
+      ],
+      "output": "Available count can differ from installed CPU count due to affinity or runtime limits.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/nproc.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/nproc.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-05-10",
+      "day": 5,
+      "theme": "Processes and memory",
+      "title": "Inspect kernel memory counters",
+      "command": "grep -E \"^(MemAvailable|SwapTotal|SwapFree|Dirty):\" /proc/meminfo",
+      "explanation": "Select useful live kernel memory counters.",
+      "breakdown": [
+        "grep -E: extended regex",
+        "^: line start",
+        "(...|...): field alternatives",
+        "colon: require exact field boundary",
+        "quoted pattern: one shell argument",
+        "/proc/meminfo: kernel virtual file"
+      ],
+      "output": "Values normally in kB (KiB here); Dirty means memory waiting to be written back.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "grep"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/grep/grep.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/grep/grep.1.en.html",
+        "https://manpages.debian.org/bookworm/manpages/proc_meminfo.5.en.html"
+      ]
+    },
+    {
+      "id": "linux-06-01",
+      "day": 6,
+      "theme": "Systemd services",
+      "title": "Find failed services",
+      "command": "systemctl --failed --type=service --no-pager",
+      "explanation": "List service units currently in the failed state.",
+      "breakdown": [
+        "systemctl: query systemd",
+        "--failed: failed state filter",
+        "--type=service: service units",
+        "--no-pager: print directly"
+      ],
+      "output": "Failed units; no rows means none currently recorded as failed.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-06-02",
+      "day": 6,
+      "theme": "Systemd services",
+      "title": "List running services",
+      "command": "systemctl list-units --type=service --state=running --no-pager",
+      "explanation": "Show loaded service units in running substate.",
+      "breakdown": [
+        "list-units: list loaded units",
+        "--type=service: service filter",
+        "--state=running: running substate",
+        "--no-pager: direct output"
+      ],
+      "output": "Active daemons; successful oneshot services may be active but exited and therefore excluded.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-06-03",
+      "day": 6,
+      "theme": "Systemd services",
+      "title": "Inspect SSH service status",
+      "command": "systemctl status ssh.service --no-pager --full",
+      "explanation": "Display status and recent journal entries for the Debian/Ubuntu SSH service.",
+      "breakdown": [
+        "status: human-readable status",
+        "ssh.service: Ubuntu/Debian OpenSSH unit",
+        "--no-pager: direct output",
+        "--full: avoid ellipsizing lines"
+      ],
+      "output": "Active/substate, PID, unit load errors and recent messages. Nonzero status can simply mean inactive.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd",
+          "openssh-server"
+        ],
+        "additionalPackages": [
+          "openssh-server"
+        ],
+        "sudo": false,
+        "notes": "Distribution-specific: Debian/Ubuntu openssh-server uses ssh.service; journal visibility depends on permissions."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-06-04",
+      "day": 6,
+      "theme": "Systemd services",
+      "title": "Read an effective service definition",
+      "command": "systemctl cat ssh.service --no-pager",
+      "explanation": "Print the unit fragment and drop-in files on disk.",
+      "breakdown": [
+        "cat: print unit source files",
+        "ssh.service: Ubuntu/Debian SSH unit",
+        "--no-pager: direct output"
+      ],
+      "output": "ExecStart and drop-ins; on-disk files may differ from the manager if not reloaded.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd",
+          "openssh-server"
+        ],
+        "additionalPackages": [
+          "openssh-server"
+        ],
+        "sudo": false,
+        "notes": "Distribution-specific: requires openssh-server unit ssh.service."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-06-05",
+      "day": 6,
+      "theme": "Systemd services",
+      "title": "Read service properties for scripts",
+      "command": "systemctl show ssh.service -p ActiveState -p SubState -p MainPID",
+      "explanation": "Request specific machine-readable properties.",
+      "breakdown": [
+        "show: unit properties",
+        "ssh.service: target unit",
+        "-p ActiveState: high-level state",
+        "-p SubState: detailed state",
+        "-p MainPID: main process ID"
+      ],
+      "output": "key=value lines; MainPID=0 usually means no current main process.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd",
+          "openssh-server"
+        ],
+        "additionalPackages": [
+          "openssh-server"
+        ],
+        "sudo": false,
+        "notes": "Distribution-specific unit name: Ubuntu/Debian ssh.service."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-06-06",
+      "day": 6,
+      "theme": "Systemd services",
+      "title": "Check whether SSH starts at boot",
+      "command": "systemctl is-enabled ssh.service",
+      "explanation": "Query enablement without changing it.",
+      "breakdown": [
+        "is-enabled: print unit-file enablement state",
+        "ssh.service: Ubuntu/Debian SSH unit"
+      ],
+      "output": "enabled, disabled, static or other states; enabled does not mean running.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd",
+          "openssh-server"
+        ],
+        "additionalPackages": [
+          "openssh-server"
+        ],
+        "sudo": false,
+        "notes": "Distribution-specific unit name; socket activation and dependencies may also start a service."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-06-07",
+      "day": 6,
+      "theme": "Systemd services",
+      "title": "Inspect the service dependency tree",
+      "command": "systemctl list-dependencies multi-user.target --no-pager",
+      "explanation": "Show forward dependencies for the multi-user target.",
+      "breakdown": [
+        "list-dependencies: dependency tree",
+        "multi-user.target: normal non-graphical multi-user target",
+        "--no-pager: direct output"
+      ],
+      "output": "Required/wanted units; this is not a complete causal record of service startup.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-06-08",
+      "day": 6,
+      "theme": "Systemd services",
+      "title": "List scheduled systemd timers",
+      "command": "systemctl list-timers --all --no-pager",
+      "explanation": "Display loaded timers, including inactive ones.",
+      "breakdown": [
+        "list-timers: timer table",
+        "--all: include inactive loaded timers",
+        "--no-pager: direct output"
+      ],
+      "output": "NEXT, LAST and ACTIVATES columns; this does not list every cron job.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-06-09",
+      "day": 6,
+      "theme": "Systemd services",
+      "title": "Find available service unit files",
+      "command": "systemctl list-unit-files --type=service --no-pager",
+      "explanation": "List installed service unit files and enablement state.",
+      "breakdown": [
+        "list-unit-files: enumerate unit files",
+        "--type=service: services only",
+        "--no-pager: direct output"
+      ],
+      "output": "Unit-file states such as enabled, disabled and static; distinct from runtime state.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-06-10",
+      "day": 6,
+      "theme": "Systemd services",
+      "title": "Inspect slow boot units",
+      "command": "systemd-analyze blame --no-pager",
+      "explanation": "Rank units by time spent activating during boot.",
+      "breakdown": [
+        "systemd-analyze: inspect boot",
+        "blame: activation-duration list",
+        "--no-pager: direct output"
+      ],
+      "output": "Long activation times; parallel startup means these durations cannot simply be summed.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/systemd-analyze.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/systemd-analyze.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-07-01",
+      "day": 7,
+      "theme": "Logs and journal",
+      "title": "Read recent boot warnings",
+      "command": "journalctl -b -p warning -n 50 --no-pager",
+      "explanation": "Show up to fifty current-boot entries at warning severity or higher.",
+      "breakdown": [
+        "journalctl: read journal",
+        "-b: current boot",
+        "-p warning: priorities emerg through warning",
+        "-n 50: last fifty matching entries",
+        "--no-pager: direct output"
+      ],
+      "output": "Time, unit and messages; unprivileged users may see only a subset.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-07-02",
+      "day": 7,
+      "theme": "Logs and journal",
+      "title": "Read SSH service logs for today",
+      "command": "journalctl -u ssh.service --since today --no-pager",
+      "explanation": "Read today’s journal entries associated with the SSH service.",
+      "breakdown": [
+        "-u ssh.service: unit filter including related service-manager messages",
+        "--since today: local midnight onward",
+        "--no-pager: direct output"
+      ],
+      "output": "Authentication/session or startup errors; access may require journal group membership or sudo.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd",
+          "openssh-server"
+        ],
+        "additionalPackages": [
+          "openssh-server"
+        ],
+        "sudo": false,
+        "notes": "Distribution-specific Ubuntu/Debian ssh.service; openssh-server may be absent."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-07-03",
+      "day": 7,
+      "theme": "Logs and journal",
+      "title": "Inspect kernel messages this boot",
+      "command": "journalctl -k -b --no-pager",
+      "explanation": "Read current-boot kernel journal entries.",
+      "breakdown": [
+        "-k: kernel messages (implies current boot)",
+        "-b: explicitly current boot",
+        "--no-pager: direct output"
+      ],
+      "output": "Driver, storage and hardware errors; restricted access may yield little or no output.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-07-04",
+      "day": 7,
+      "theme": "Logs and journal",
+      "title": "List retained boot histories",
+      "command": "journalctl --list-boots --no-pager",
+      "explanation": "List boots for which journal records remain available.",
+      "breakdown": [
+        "--list-boots: boot offsets, IDs and first/last timestamps",
+        "--no-pager: direct output"
+      ],
+      "output": "Offset 0 is current boot; previous boots require retained journal data.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-07-05",
+      "day": 7,
+      "theme": "Logs and journal",
+      "title": "Read the previous boot’s errors",
+      "command": "journalctl -b -1 -p err --no-pager",
+      "explanation": "Read error-and-higher entries from the preceding retained boot.",
+      "breakdown": [
+        "-b -1: previous boot offset",
+        "-p err: emerg through err",
+        "--no-pager: direct output"
+      ],
+      "output": "Errors preceding reboot; no previous journal may mean storage was volatile.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-07-06",
+      "day": 7,
+      "theme": "Logs and journal",
+      "title": "Follow new service messages",
+      "command": "journalctl -u cron.service -f -n 20",
+      "explanation": "Show twenty recent matching messages and continue following arrivals.",
+      "breakdown": [
+        "-u cron.service: Ubuntu/Debian cron unit filter",
+        "-f: follow new messages",
+        "-n 20: initial tail of twenty entries"
+      ],
+      "output": "New cron service messages; Ctrl+C stops the terminal reader, not cron.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd",
+          "cron"
+        ],
+        "additionalPackages": [
+          "cron"
+        ],
+        "sudo": false,
+        "notes": "Distribution-specific cron.service; package cron may not be installed."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-07-07",
+      "day": 7,
+      "theme": "Logs and journal",
+      "title": "Measure journal storage",
+      "command": "journalctl --disk-usage",
+      "explanation": "Report disk use of active and archived journal files.",
+      "breakdown": [
+        "--disk-usage: sum journal-file disk usage; does not vacuum or delete"
+      ],
+      "output": "A storage total limited to accessible journal files.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-07-08",
+      "day": 7,
+      "theme": "Logs and journal",
+      "title": "Print precise journal timestamps",
+      "command": "journalctl -b -n 20 -o short-iso-precise --no-pager",
+      "explanation": "Print twenty current-boot entries with ISO-style microsecond timestamps.",
+      "breakdown": [
+        "-b: current boot",
+        "-n 20: last twenty",
+        "-o short-iso-precise: ISO timestamps with microseconds",
+        "--no-pager: direct output"
+      ],
+      "output": "Timestamps and timezone offsets useful for correlation.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-07-09",
+      "day": 7,
+      "theme": "Logs and journal",
+      "title": "Inspect package transaction logs",
+      "command": "tail -n 40 -- /var/log/dpkg.log",
+      "explanation": "Read forty recent lines from the dpkg log file.",
+      "breakdown": [
+        "tail: ending lines",
+        "-n 40: last forty",
+        "--: end options",
+        "/var/log/dpkg.log: Ubuntu/Debian package log"
+      ],
+      "output": "Package state transitions and installed/upgraded versions; rotated history is in other files.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Distribution-specific dpkg log; may be absent or rotated."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/tail.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/tail.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-07-10",
+      "day": 7,
+      "theme": "Logs and journal",
+      "title": "Search journal message text",
+      "command": "journalctl -b --grep=\"timeout\" --case-sensitive=no -n 30 --no-pager",
+      "explanation": "Search MESSAGE fields for timeout, ignoring case.",
+      "breakdown": [
+        "-b: current boot",
+        "--grep=\"timeout\": regular expression applied to message text",
+        "--case-sensitive=no: case-insensitive matching",
+        "-n 30: last thirty matches",
+        "--no-pager: direct output"
+      ],
+      "output": "Newest matching messages first because --grep combined with -n implies reverse order; journal search uses PCRE2.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/journalctl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-08-01",
+      "day": 8,
+      "theme": "Networking inspection",
+      "title": "Summarize interface addresses",
+      "command": "ip -brief address show",
+      "explanation": "Show concise interface state and assigned addresses.",
+      "breakdown": [
+        "ip: iproute2 network tool",
+        "-brief: short table",
+        "address: address object",
+        "show: inspect"
+      ],
+      "output": "UP/DOWN state and IPv4/IPv6 addresses with prefix lengths.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "iproute2"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/iproute2/ip.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/iproute2/ip.8.en.html",
+        "https://manpages.debian.org/bookworm/iproute2/ip-address.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-08-02",
+      "day": 8,
+      "theme": "Networking inspection",
+      "title": "Inspect link counters",
+      "command": "ip -s link show",
+      "explanation": "Display network interfaces and traffic/error counters.",
+      "breakdown": [
+        "-s: statistics",
+        "link: device object",
+        "show: inspect all links"
+      ],
+      "output": "RX/TX errors and drops; compare snapshots to see whether counters are increasing.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "iproute2"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/iproute2/ip.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/iproute2/ip.8.en.html",
+        "https://manpages.debian.org/bookworm/iproute2/ip-link.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-08-03",
+      "day": 8,
+      "theme": "Networking inspection",
+      "title": "Inspect IPv4 routing",
+      "command": "ip -4 route show",
+      "explanation": "List routes in the default IPv4 main table.",
+      "breakdown": [
+        "-4: IPv4 only",
+        "route: routing object",
+        "show: list routes"
+      ],
+      "output": "Default gateway, output device, source and metric.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "iproute2"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/iproute2/ip.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/iproute2/ip.8.en.html",
+        "https://manpages.debian.org/bookworm/iproute2/ip-route.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-08-04",
+      "day": 8,
+      "theme": "Networking inspection",
+      "title": "Inspect IPv6 routing",
+      "command": "ip -6 route show",
+      "explanation": "List routes in the default IPv6 main table.",
+      "breakdown": [
+        "-6: IPv6 only",
+        "route show: list routes"
+      ],
+      "output": "Default route and link-local gateways; absence may be intentional.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "iproute2"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/iproute2/ip.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/iproute2/ip.8.en.html",
+        "https://manpages.debian.org/bookworm/iproute2/ip-route.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-08-05",
+      "day": 8,
+      "theme": "Networking inspection",
+      "title": "Ask the kernel which route it would use",
+      "command": "ip route get 1.1.1.1",
+      "explanation": "Resolve a route lookup without sending a probe packet.",
+      "breakdown": [
+        "route: routing object",
+        "get: perform resolved lookup",
+        "1.1.1.1: example destination address"
+      ],
+      "output": "Selected device, gateway and source; this does not prove remote connectivity.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "iproute2"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/iproute2/ip-route.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/iproute2/ip-route.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-08-06",
+      "day": 8,
+      "theme": "Networking inspection",
+      "title": "Inspect neighbor resolution",
+      "command": "ip neighbour show",
+      "explanation": "List cached ARP and IPv6 neighbor entries.",
+      "breakdown": [
+        "neighbour: neighbor cache object",
+        "show: inspect entries"
+      ],
+      "output": "REACHABLE/STALE can be normal; FAILED suggests unresolved neighbors.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "iproute2"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/iproute2/ip-neighbour.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/iproute2/ip-neighbour.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-08-07",
+      "day": 8,
+      "theme": "Networking inspection",
+      "title": "Find TCP listening ports",
+      "command": "ss -ltn",
+      "explanation": "Display listening TCP sockets with numeric endpoints.",
+      "breakdown": [
+        "ss: socket statistics",
+        "-l: listening",
+        "-t: TCP",
+        "-n: numeric ports and addresses"
+      ],
+      "output": "Local bind addresses; 127.0.0.1 is loopback while wildcard addresses have broader scope.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "iproute2"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/iproute2/ss.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/iproute2/ss.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-08-08",
+      "day": 8,
+      "theme": "Networking inspection",
+      "title": "Find UDP listeners and owners",
+      "command": "sudo ss -lunp",
+      "explanation": "Inspect listening/unconnected UDP sockets and process ownership.",
+      "breakdown": [
+        "sudo: elevated process visibility",
+        "-l: listening sockets",
+        "-u: UDP",
+        "-n: numeric endpoints",
+        "-p: owning process information"
+      ],
+      "output": "Bound ports and process names/PIDs; UDP has no TCP-style listening handshake.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "iproute2",
+          "sudo"
+        ],
+        "additionalPackages": [],
+        "sudo": true,
+        "notes": "sudo authorization required for full process visibility; sudo may write an audit log."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/iproute2/ss.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/iproute2/ss.8.en.html",
+        "https://manpages.debian.org/bookworm/sudo/sudo.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-08-09",
+      "day": 8,
+      "theme": "Networking inspection",
+      "title": "Summarize socket pressure",
+      "command": "ss -s",
+      "explanation": "Print aggregate socket statistics.",
+      "breakdown": [
+        "ss: socket statistics",
+        "-s: summary instead of individual sockets"
+      ],
+      "output": "TCP established, orphaned and time-wait counts; spikes need comparison with normal workload.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "iproute2"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/iproute2/ss.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/iproute2/ss.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-08-10",
+      "day": 8,
+      "theme": "Networking inspection",
+      "title": "Inspect policy routing rules",
+      "command": "ip rule show",
+      "explanation": "List IPv4 policy routing rules and priorities.",
+      "breakdown": [
+        "rule: routing-policy database object",
+        "show: list rules; default family is IPv4"
+      ],
+      "output": "Lower priority numbers are evaluated first; referenced tables may contain separate routes.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "iproute2"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/iproute2/ip-rule.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/iproute2/ip-rule.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-09-01",
+      "day": 9,
+      "theme": "Ubuntu/Debian packages and host",
+      "title": "Identify the distribution release",
+      "command": "cat /etc/os-release",
+      "explanation": "Read standard operating-system identification fields.",
+      "breakdown": [
+        "cat: print file contents",
+        "/etc/os-release: distribution identification file"
+      ],
+      "output": "ID, VERSION_ID and PRETTY_NAME; values can be quoted.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils",
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/cat.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/cat.1.en.html",
+        "https://manpages.debian.org/bookworm/systemd/os-release.5.en.html"
+      ]
+    },
+    {
+      "id": "linux-09-02",
+      "day": 9,
+      "theme": "Ubuntu/Debian packages and host",
+      "title": "Inspect kernel and architecture",
+      "command": "uname -a",
+      "explanation": "Print all available uname system information.",
+      "breakdown": [
+        "uname: system identification",
+        "-a: all available fields in documented order"
+      ],
+      "output": "Kernel release and machine type; this identifies the kernel rather than the distribution release.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/uname.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/uname.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-09-03",
+      "day": 9,
+      "theme": "Ubuntu/Debian packages and host",
+      "title": "Inspect host identity",
+      "command": "hostnamectl status",
+      "explanation": "Read systemd host identity and related system properties.",
+      "breakdown": [
+        "hostnamectl: host identity tool",
+        "status: show current status"
+      ],
+      "output": "Static hostname, OS, kernel and virtualization details when available.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/hostnamectl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/hostnamectl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-09-04",
+      "day": 9,
+      "theme": "Ubuntu/Debian packages and host",
+      "title": "Inspect clock synchronization status",
+      "command": "timedatectl status",
+      "explanation": "Read local time, timezone and synchronization state.",
+      "breakdown": [
+        "timedatectl: system clock information",
+        "status: display settings"
+      ],
+      "output": "Timezone and synchronized status; active time service does not by itself prove synchronization.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/timedatectl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/timedatectl.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-09-05",
+      "day": 9,
+      "theme": "Ubuntu/Debian packages and host",
+      "title": "List installed packages with versions",
+      "command": "dpkg-query -W -f='${binary:Package}\t${Version}\t${db:Status-Status}\n'",
+      "explanation": "Query the local package database with an explicit format.",
+      "breakdown": [
+        "dpkg-query: Debian package query",
+        "-W: show package records",
+        "-f: output format",
+        "${binary:Package}: package name, possibly architecture-qualified",
+        "\\t: tab",
+        "${Version}: version",
+        "${db:Status-Status}: package status",
+        "\\n: newline",
+        "single quotes: prevent Bash expanding dollar expressions"
+      ],
+      "output": "Package/version/status lines; some records may be config-files rather than installed.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "dpkg"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Distribution-specific: Ubuntu/Debian dpkg database."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/dpkg/dpkg-query.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/dpkg/dpkg-query.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-09-06",
+      "day": 9,
+      "theme": "Ubuntu/Debian packages and host",
+      "title": "Find which package owns a command path",
+      "command": "dpkg-query -S /usr/bin/ls",
+      "explanation": "Find package database ownership of a path.",
+      "breakdown": [
+        "-S: search installed package file-name records",
+        "/usr/bin/ls: path search operand"
+      ],
+      "output": "Usually coreutils; merged-/usr aliases can affect path lookup on some versions.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "dpkg"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Distribution-specific dpkg ownership database; excludes some generated files."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/dpkg/dpkg-query.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/dpkg/dpkg-query.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-09-07",
+      "day": 9,
+      "theme": "Ubuntu/Debian packages and host",
+      "title": "List files shipped by a package",
+      "command": "dpkg-query -L coreutils",
+      "explanation": "List recorded paths belonging to coreutils.",
+      "breakdown": [
+        "-L: list package files",
+        "coreutils: package name"
+      ],
+      "output": "Binaries, documentation and other package paths; generated runtime files may be absent.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "dpkg"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Distribution-specific Ubuntu/Debian package database."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/dpkg/dpkg-query.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/dpkg/dpkg-query.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-09-08",
+      "day": 9,
+      "theme": "Ubuntu/Debian packages and host",
+      "title": "Inspect installed and candidate versions",
+      "command": "apt-cache policy openssh-server",
+      "explanation": "Read package version policy from local APT metadata.",
+      "breakdown": [
+        "apt-cache: inspect cached APT metadata",
+        "policy: installed/candidate versions and priorities",
+        "openssh-server: package name"
+      ],
+      "output": "Installed and Candidate versions with repository priorities; metadata can be stale.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "apt"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Distribution-specific Ubuntu/Debian APT; no repository refresh or installation occurs."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/apt/apt-cache.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/apt/apt-cache.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-09-09",
+      "day": 9,
+      "theme": "Ubuntu/Debian packages and host",
+      "title": "List package dependencies",
+      "command": "apt-cache depends openssh-server",
+      "explanation": "Display dependency relationships from local APT metadata.",
+      "breakdown": [
+        "depends: dependency listing",
+        "openssh-server: target package"
+      ],
+      "output": "Depends, PreDepends, alternatives and recommendations; listed dependencies are not necessarily installed.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "apt"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Distribution-specific Ubuntu/Debian APT; uses existing cached metadata."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/apt/apt-cache.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/apt/apt-cache.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-09-10",
+      "day": 9,
+      "theme": "Ubuntu/Debian packages and host",
+      "title": "Audit incomplete package installations",
+      "command": "dpkg --audit",
+      "explanation": "Check package database consistency for partial installations or missing control data.",
+      "breakdown": [
+        "dpkg: Debian package manager",
+        "--audit: report consistency problems without repairing them"
+      ],
+      "output": "Descriptions of packages needing attention; no output usually means no issues found by this check.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "dpkg"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Distribution-specific Ubuntu/Debian dpkg; inspection only, not a dependency repair."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/dpkg/dpkg.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/dpkg/dpkg.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-10-01",
+      "day": 10,
+      "theme": "Bash diagnostic workflows",
+      "title": "Count failed service rows",
+      "command": "systemctl --failed --type=service --legend=no --plain --no-pager | wc -l",
+      "explanation": "Count printed failed-service records.",
+      "breakdown": [
+        "systemctl --failed: failed units",
+        "--type=service: services",
+        "--legend=no: omit header/footer",
+        "--plain: omit tree/bullet decoration",
+        "--no-pager: direct output",
+        "|: pipe rows",
+        "wc -l: count newlines"
+      ],
+      "output": "A row count; upstream errors go to stderr and must not be mistaken for a healthy zero.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd",
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/systemctl.1.en.html",
+        "https://manpages.debian.org/bookworm/coreutils/wc.1.en.html",
+        "https://manpages.debian.org/bookworm/bash/bash.1.en.html",
+        "https://www.gnu.org/software/bash/manual/html_node/Pipelines"
+      ]
+    },
+    {
+      "id": "linux-10-02",
+      "day": 10,
+      "theme": "Bash diagnostic workflows",
+      "title": "Rank repeated local login shells",
+      "command": "cut -d: -f7 /etc/passwd | sort | uniq -c | sort -nr",
+      "explanation": "Count local account shell values and rank by frequency.",
+      "breakdown": [
+        "cut -d: -f7: extract colon-delimited seventh field",
+        "/etc/passwd: input",
+        "each |: pipe stdout into next stage",
+        "sort: group equal shell paths",
+        "uniq -c: count adjacent equal lines",
+        "sort -nr: numeric, descending counts"
+      ],
+      "output": "Most common shells first; counts reflect local accounts rather than current logins.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/cut.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/cut.1.en.html",
+        "https://manpages.debian.org/bookworm/coreutils/sort.1.en.html",
+        "https://manpages.debian.org/bookworm/coreutils/uniq.1.en.html",
+        "https://manpages.debian.org/bookworm/bash/bash.1.en.html",
+        "https://www.gnu.org/software/bash/manual/html_node/Pipelines"
+      ]
+    },
+    {
+      "id": "linux-10-03",
+      "day": 10,
+      "theme": "Bash diagnostic workflows",
+      "title": "Check a setting as literal text",
+      "command": "grep -nF -- \"127.0.0.1\" /etc/hosts",
+      "explanation": "Search for literal dots rather than regex wildcard dots.",
+      "breakdown": [
+        "-n: line numbers",
+        "-F: fixed strings",
+        "--: end options",
+        "\"127.0.0.1\": literal text",
+        "/etc/hosts: file"
+      ],
+      "output": "Matching lines, including comments; substring matching can also find longer addresses.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "grep"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/grep/grep.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/grep/grep.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-10-04",
+      "day": 10,
+      "theme": "Bash diagnostic workflows",
+      "title": "Check whether a file is readable",
+      "command": "if test -r /etc/shadow; then printf '%s\n' 'Readable'; else printf '%s\n' 'Not readable'; fi",
+      "explanation": "Use Bash control flow to explain a permission check without reading secret contents.",
+      "breakdown": [
+        "if ... then ... else ... fi: branch on exit status",
+        "test -r /etc/shadow: true if readable by this process",
+        ";: separate shell commands",
+        "printf: formatted output",
+        "%s: string placeholder",
+        "\\n: newline",
+        "quoted messages: printed arguments"
+      ],
+      "output": "Readable or Not readable; root and ordinary users commonly get different answers.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "bash"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/bash/bash.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/bash/bash.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-10-05",
+      "day": 10,
+      "theme": "Bash diagnostic workflows",
+      "title": "Save a local network snapshot",
+      "command": "ip -brief address show > \"$HOME/network-snapshot.txt\"",
+      "explanation": "Write address information to a personal text file.",
+      "breakdown": [
+        "ip -brief address show: concise address inspection",
+        ">: redirect stdout, creating or truncating the file",
+        "\"$HOME/network-snapshot.txt\": quoted home path; expands HOME"
+      ],
+      "output": "No terminal output on success; the file contains addresses. Existing contents are overwritten.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "iproute2"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": true,
+      "stateChange": "CHANGES STATE: creates or overwrites $HOME/network-snapshot.txt.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/iproute2/ip.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/iproute2/ip.8.en.html",
+        "https://manpages.debian.org/bookworm/iproute2/ip-address.8.en.html",
+        "https://manpages.debian.org/bookworm/bash/bash.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-10-06",
+      "day": 10,
+      "theme": "Bash diagnostic workflows",
+      "title": "Append a timestamp to a diagnostic notebook",
+      "command": "date -Is >> \"$HOME/diagnostic-notes.txt\"",
+      "explanation": "Append the current timestamp without replacing earlier notes.",
+      "breakdown": [
+        "date: print current time",
+        "-Is: ISO 8601 format at seconds precision, including offset",
+        ">>: append stdout; create file if missing",
+        "quoted HOME path: single filename"
+      ],
+      "output": "A new timestamp line in the file; terminal stays quiet on success.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "coreutils"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": true,
+      "stateChange": "CHANGES STATE: creates or appends to $HOME/diagnostic-notes.txt.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/coreutils/date.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/coreutils/date.1.en.html",
+        "https://manpages.debian.org/bookworm/bash/bash.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-10-07",
+      "day": 10,
+      "theme": "Bash diagnostic workflows",
+      "title": "Inspect SSH effective configuration",
+      "command": "sudo /usr/sbin/sshd -T",
+      "explanation": "Ask the SSH daemon to validate configuration and print effective settings, then exit.",
+      "breakdown": [
+        "sudo: elevated access to configuration and host keys",
+        "/usr/sbin/sshd: server binary on Ubuntu/Debian",
+        "-T: extended configuration test; print effective settings and exit"
+      ],
+      "output": "Effective key/value settings; connection-dependent Match rules require suitable -C parameters for a specific case.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "openssh-server",
+          "sudo"
+        ],
+        "additionalPackages": [
+          "openssh-server"
+        ],
+        "sudo": true,
+        "notes": "Distribution-specific binary path; sudo authorization and configured OpenSSH server required. Does not start the daemon; sudo may log the invocation."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/openssh-server/sshd.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/openssh-server/sshd.8.en.html",
+        "https://manpages.debian.org/bookworm/sudo/sudo.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-10-08",
+      "day": 10,
+      "theme": "Bash diagnostic workflows",
+      "title": "Find a named executable in Bash",
+      "command": "type -a -- ls",
+      "explanation": "Show how Bash resolves a command, including aliases, functions and executable paths.",
+      "breakdown": [
+        "type: Bash command lookup builtin",
+        "-a: all matching definitions/locations",
+        "--: end options",
+        "ls: command name"
+      ],
+      "output": "Aliases or functions can change interactive behavior before the external binary is considered.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "bash"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/bash/bash.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/bash/bash.1.en.html"
+      ]
+    },
+    {
+      "id": "linux-10-09",
+      "day": 10,
+      "theme": "Bash diagnostic workflows",
+      "title": "Inspect TCP connections in established state",
+      "command": "ss -tn state established",
+      "explanation": "Filter TCP sockets by established state.",
+      "breakdown": [
+        "ss: socket inspection",
+        "-t: TCP",
+        "-n: numeric endpoints",
+        "state established: socket state filter"
+      ],
+      "output": "Peer endpoints, receive and send queues; persistent large queues deserve investigation.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "iproute2"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/iproute2/ss.8.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/iproute2/ss.8.en.html"
+      ]
+    },
+    {
+      "id": "linux-10-10",
+      "day": 10,
+      "theme": "Bash diagnostic workflows",
+      "title": "Show boot dependency timing",
+      "command": "systemd-analyze critical-chain --no-pager",
+      "explanation": "Print the time-critical chain of units for the default target.",
+      "breakdown": [
+        "systemd-analyze: boot analysis",
+        "critical-chain: timing dependency tree",
+        "--no-pager: direct output"
+      ],
+      "output": "@ marks activation time since boot; + marks activation duration. Parallel and socket activation limit conclusions.",
+      "requirements": {
+        "platform": "Ubuntu/Debian; Bash; GNU userland; systemd for systemd commands",
+        "packages": [
+          "systemd"
+        ],
+        "additionalPackages": [],
+        "sudo": false,
+        "notes": "Paths and interface names are examples; replace them with targets that exist. Permission errors mean some data was not inspected."
+      },
+      "changesSystemState": false,
+      "stateChange": "Inspection only; reads may update access times according to filesystem policy.",
+      "sourceUrl": "https://manpages.debian.org/bookworm/systemd/systemd-analyze.1.en.html",
+      "sourceUrls": [
+        "https://manpages.debian.org/bookworm/systemd/systemd-analyze.1.en.html"
+      ]
+    }
+  ]
+}

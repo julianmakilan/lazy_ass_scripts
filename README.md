@@ -57,3 +57,11 @@ Implementation references: [Scriptable widgets](https://docs.scriptable.app/list
 ## Terminal activity (`productive.js`)
 
 Run `node productive.js` for simulated build activity. Press Ctrl+C to stop.
+
+## Linux administration learning cards (`linux_learn.js`)
+
+A medium/large Scriptable widget with 100 locally stored command cards in ten themed
+sets, hourly selection, a full answer reader, and optional notifications.
+See [installation, scheduling, and content instructions](LINUX_LEARN.md).
+The deck is [linux-deck.json](linux-deck.json); verification uses
+`node --test tests/linux_learn.test.js`.
